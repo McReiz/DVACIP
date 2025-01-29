@@ -6,8 +6,9 @@ Download video (from youtube) and cut into equal parts no longer than 30 seconds
 - Python 3.12.5 or higher https://www.python.org/downloads/
 
 # Depends:
-- yt-dlp" 
+- yt-dlp
 - pydub
+
 pip install yt-dlp pydub
 
 - "ffmpeg"
@@ -22,7 +23,9 @@ Download in: https://github.com/GyanD/codexffmpeg/releases
 - Open with python: download-and-convert.py
 
 - Insert youtube url:
+
 then
+
 - Insert name for folder:
 
 The files will be generated in the folder output/foldername/clips
