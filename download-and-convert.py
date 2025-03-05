@@ -12,13 +12,16 @@ folder_name = input("Folder name: ")
 
 # Configuration
 
-OUTPUT_VIDEO = "./outputs/"+folder_name+"/video.mp4"
-OUTPUT_AUDIO = "./outputs/"+folder_name+"/audio.wav"
-AMPLIFIED_AUDIO = "./outputs/"+folder_name+"/audio_amplified.wav"
-CLIPS_FOLDER = "./outputs/"+folder_name+"/clips"
+OUTPUT_FOLDER = "./outputs/"+folder_name
+OUTPUT_VIDEO = OUTPUT_FOLDER+"/video.mp4"
+OUTPUT_AUDIO = OUTPUT_FOLDER+"/audio.wav"
+AMPLIFIED_AUDIO = OUTPUT_FOLDER+"/audio_amplified.wav"
+CLIPS_FOLDER = OUTPUT_FOLDER+"/clips"
 MAX_DURATION = 30 * 1000  # 30 seconds in milliseconds
 AMPLIFICATION_DB = 5  # Approximately 30% increase in volume
 FFMPEG_PATH = os.path.join(os.getcwd(), "ffmpeg.exe")  # ffmpeg path in the same folder
+
+clip_durations = ""
 
 # Ensure the clips folder exists
 os.makedirs(CLIPS_FOLDER, exist_ok=True)
@@ -76,11 +79,16 @@ def amplify_audio(input_file, output_file, gain_dB):
 
 # Step 4: Split the audio into equal parts (but no more than 30s per clip)
 def split_audio(input_file, output_folder, max_segment_duration):
+    global clip_durations
+
     audio = AudioSegment.from_wav(input_file)
     total_duration = len(audio)
     
     num_segments = math.ceil(total_duration / max_segment_duration)
     segment_duration = total_duration // num_segments  # Divide into equal parts
+
+    clip_durations = f"{segment_duration / 1000:.2f}"
+    # print(clip_durations)
     
     for i in range(num_segments):
         start_time = i * segment_duration
@@ -89,12 +97,21 @@ def split_audio(input_file, output_folder, max_segment_duration):
         clip.export(os.path.join(output_folder, f"clip_{i+1}.wav"), format="wav")
         print(f"[✔] Clip {i+1} duration : ({segment_duration / 1000:.2f} seconds).")
 
+# Step 5: Create text log
+def generate_log():
+    with open(OUTPUT_FOLDER+"/"+clip_durations+".txt", "a", encoding="utf-8") as file:
+        file.write("Link source: "+ VIDEO_URL + "\n")
+        file.write("=================================\n")
+        file.write(folder_name + "\n")
+        file.write("6e664485-dd1d-0af4-fede-6e1556dddf35\n")
+        file.write(clip_durations + "\n")
+
 #extras
 def get_base_name(input_file):
     """Obtiene el nombre base de un archivo (sin la extensión)."""
     base_name, _ = os.path.splitext(input_file)
 
-    print(f"[basename]: '{base_name}'.")
+    #print(f"[basename]: '{base_name}'.")
 
     return base_name
 
@@ -120,6 +137,7 @@ convert_to_wav(OUTPUT_VIDEO, OUTPUT_AUDIO)
 amplify_audio(OUTPUT_AUDIO, AMPLIFIED_AUDIO, AMPLIFICATION_DB)
 split_audio(AMPLIFIED_AUDIO, CLIPS_FOLDER, MAX_DURATION)
 
+generate_log();
 
 print("[✅] Process completed successfully.")
 
