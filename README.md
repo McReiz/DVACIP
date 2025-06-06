@@ -9,6 +9,7 @@ Download video (from youtube) and cut into equal parts no longer than 30 seconds
 - yt-dlp
 - pydub
 - audioop-lts
+
 pip install yt-dlp pydub audioop-lts
 
 - "ffmpeg"
