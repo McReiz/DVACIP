@@ -1,0 +1,1 @@
+pip install yt-dlp pydub audioop-lts

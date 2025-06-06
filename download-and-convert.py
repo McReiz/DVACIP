@@ -18,7 +18,7 @@ OUTPUT_AUDIO = OUTPUT_FOLDER+"/audio.wav"
 AMPLIFIED_AUDIO = OUTPUT_FOLDER+"/audio_amplified.wav"
 CLIPS_FOLDER = OUTPUT_FOLDER+"/clips"
 MAX_DURATION = 30 * 1000  # 30 seconds in milliseconds
-AMPLIFICATION_DB = 5  # Approximately 30% increase in volume
+AMPLIFICATION_DB = 3  # Approximately 30% increase in volume
 FFMPEG_PATH = os.path.join(os.getcwd(), "ffmpeg.exe")  # ffmpeg path in the same folder
 
 clip_durations = ""
