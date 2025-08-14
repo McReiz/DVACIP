@@ -21,7 +21,7 @@ Download in: https://github.com/GyanD/codexffmpeg/releases
 - ffprobe.exe
 
 # How use:
-- Open with python: download-and-convert.py
+- Open "start.bat"
 
 - Insert youtube url:
 
