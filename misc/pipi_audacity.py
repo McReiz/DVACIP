@@ -89,6 +89,16 @@ def audacity_amplify(input_file,ouput_file,amplify):
 
     print( 'Amplificado' )
 
+def audacity_amplify_compressor(input_file,ouput_file,compressionRatio,makeupGainDb):
+    do_command('Import2:Filename="'+ input_file +'"')
+    do_command('SelectAll:')
+    #do_command('Amplify:Ratio="' + amplify + '"')
+    do_command('Compressor:attackMs="30" compressionRatio="'+compressionRatio+'" kneeWidthDb="5" lookaheadMs="1" makeupGainDb="'+makeupGainDb+'" releaseMs="150" showActual="1" showInput="0"')
+    do_command('Export2:Filename="'+ouput_file+'" NumChannels="1"')
+    do_command('RemoveTracks:')
+
+    print( 'Amplificado' )
+
 def test():
     print("hola mundo")
     stop_test = input("stop...")
