@@ -12,15 +12,17 @@ from pydub import AudioSegment
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
-FILENAME = input("../inputs/(filename).mp3 ")
-folder_name = input("Folder name: ")
+print("#\n\n\n")
+print( "# Nombre del archivo dentro de \"../inputs/(filename).mp3\" (No incluir la extension) " )
+FILENAME = input("Nombre del archivo: ")
+#folder_name = input("Folder name: ")
 
 # Configuration
 
 PATH_ROOT = utils.get_path_parent()
 
 INPUT_FOLDER = PATH_ROOT+"/inputs/"
-OUTPUT_FOLDER = PATH_ROOT+"/outputs/"+folder_name
+OUTPUT_FOLDER = PATH_ROOT+"/outputs/"+FILENAME
 
 OUTPUT_VIDEO = INPUT_FOLDER+FILENAME
 OUTPUT_AUDIO = OUTPUT_FOLDER+"/audio.wav"

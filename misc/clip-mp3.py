@@ -6,12 +6,15 @@ from pydub import AudioSegment
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
-FILENAME = input("../inputs/(filename).mp3 ")
-folder_name = input("Folder name: ")
+print("#\n\n\n")
+
+print( "# Nombre del archivo dentro de \"../inputs/(filename).mp3\" (No incluir la extension) " )
+FILENAME = input("Nombre del archivo: ")
+#folder_name = input("Folder name: ")
 
 # Configuration
 
-OUTPUT_FOLDER = "../outputs/"+folder_name
+OUTPUT_FOLDER = "../outputs/"+FILENAME
 INPUT_VIDEO = "../inputs/"+FILENAME
 OUTPUT_AUDIO = OUTPUT_FOLDER+"/audio.wav"
 AMPLIFIED_AUDIO = OUTPUT_FOLDER+"/audio_amplified.wav"
