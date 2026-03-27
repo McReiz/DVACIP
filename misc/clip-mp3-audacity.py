@@ -106,7 +106,7 @@ def generate_log():
     with open(OUTPUT_FOLDER+"/"+clip_durations+".txt", "a", encoding="utf-8") as file:
         file.write("by DVACIP\n")
         file.write("=================================\n")
-        file.write(folder_name + "\n")
+        file.write(FILENAME + "\n")
         file.write("6e664485-dd1d-0af4-fede-6e1556dddf35\n")
         file.write(clip_durations + "\n")
 
