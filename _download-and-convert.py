@@ -1,8 +1,13 @@
 import os
+import sys
 import math
 import subprocess
+from pathlib import Path
 from yt_dlp import YoutubeDL
 from pydub import AudioSegment
+
+from misc import pipi_audacity
+from misc import utils
 
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
@@ -29,9 +34,15 @@ os.makedirs(CLIPS_FOLDER, exist_ok=True)
 # Step 1: Download YouTube video in MP4 format
 def download_video(url, output_path):
     ydl_opts = {
-        'format': 'bestvideo+bestaudio/best',
+        'format': '-f m4a/bestaudio/best',
         'outtmpl': output_path
     }
+
+    cookie_file = '_youtube_cookies.txt'
+    if os.path.exists(cookie_file):
+        ydl_opts['cookiefile'] = cookie_file
+        print(f"[i] Usando cookies desde: {cookie_file}")
+
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
     print("[✔] Success Video Download.")
@@ -103,7 +114,7 @@ def generate_log():
         file.write("Link source: "+ VIDEO_URL + "\n")
         file.write("=================================\n")
         file.write(folder_name + "\n")
-        file.write("6e664485-dd1d-0af4-fede-6e1556dddf35\n")
+        file.write("b5a22823-f289-fe86-79ac-3963643f0298\n")
         file.write(clip_durations + "\n")
 
 #extras

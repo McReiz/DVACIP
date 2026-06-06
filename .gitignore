@@ -1,4 +1,5 @@
 outputs/
+list/
 __pycache__/
 __pycache__
 *.mp3
@@ -8,3 +9,5 @@ ffmpeg.exe
 ffplay.exe
 ffprobe.exe
 setuo.bat
+_youtube_cookies.txt
+_youtube_cookies*

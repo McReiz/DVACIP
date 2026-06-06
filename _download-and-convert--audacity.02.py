@@ -1,6 +1,8 @@
+
 import os
 import sys
 import math
+import argparse
 import subprocess
 from pathlib import Path
 from yt_dlp import YoutubeDL
@@ -12,8 +14,20 @@ from misc import utils
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
-VIDEO_URL = input("Youtube URL: ")
-folder_name = input("Folder name: ")
+parser = argparse.ArgumentParser(description="Script para procesar videos de YouTube.")
+
+parser.add_argument("--video_url", help="URL del video de YouTube", required=True)
+parser.add_argument("--folder_name", help="Nombre de la carpeta de destino", required=True)
+
+UUID_POR_DEFECTO = "b5a22823-f289-fe86-79ac-3963643f0298"    
+parser.add_argument('--disc_patter_uuid', type=str, default=UUID_POR_DEFECTO)
+
+args = parser.parse_args()
+
+UUID_PATTER_DISC = args.disc_patter_uuid
+
+VIDEO_URL = args.video_url
+folder_name = args.folder_name
 
 # Configuration
 
@@ -117,7 +131,7 @@ def generate_text_header():
         file.write("Link source: "+ VIDEO_URL + "\n")
         file.write("=================================\n")
         file.write(folder_name + "\n")
-        file.write("b5a22823-f289-fe86-79ac-3963643f0298\n")
+        file.write(UUID_PATTER_DISC+"\n")
         file.write(clip_durations + "\n")
 
 #extras
@@ -168,4 +182,4 @@ generate_text_header();
 
 print("[✅] Process completed successfully.")
 
-input("Press Enter to continue...")
+#input("Press Enter to continue...")
