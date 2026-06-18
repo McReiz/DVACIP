@@ -1,6 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
+set /p "UUID_INPUT=Introduce el disc_patter_uuid (Opcional, pulsa Enter para saltar): "
+
 :: 1. Verificar si pasaste el nombre como parámetro (ej: mi_script.bat musica.txt)
 set "nombre_archivo=%~1"
 
@@ -27,7 +29,12 @@ echo ---------------------------------
 :: 5. Bucle para procesar el archivo
 for /f "usebackq tokens=1,2 delims=|" %%a in ("%ruta_completa%") do (
     echo Procesando: %%b
-    python _download-and-convert--audacity.02.py --video_url="%%a" --folder_name="%%b"
+    if not "!UUID_INPUT!"=="" (
+        python _download-and-convert--audacity.02.py --video_url="%%a" --folder_name="%%b" --disc_patter_uuid="!UUID_INPUT!"
+    ) else (
+        python _download-and-convert--audacity.02.py --video_url="%%a" --folder_name="%%b"
+    )
+
     echo ---------------------------------
 )
 
